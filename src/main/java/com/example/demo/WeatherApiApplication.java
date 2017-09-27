@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,11 +25,14 @@ class WeatherCommandLineRunner implements CommandLineRunner{
 	@Override
 	public void run(String...args) throws Exception {
 		System.out.println("holaaaaa mundoooo");
-		Board board = new Board(16, "caluroso");
-		System.out.println("temperatura:"+board.getTemp());
-		System.out.println("Texto:"+board.getText());
+		for (Board b : this.boardRepository.findAll()) {
+			System.out.println("temperatura:"+b.getTemp());
+			System.out.println("Texto:"+b.getText());
+		}
 	}
 	
+	@Autowired
+	BoardRepository boardRepository;
 }
 
 @RestController
@@ -35,10 +40,12 @@ class WeatherCommandLineRunner implements CommandLineRunner{
 class WeatherRestController {
 	
 	@RequestMapping("/boards")
-	Board test() {
-		Board board = new Board(16, "caluroso");
-		return board;
+	Collection<Board> boards() {
+		return this.boardRepository.findAll();
 	}
+	
+	@Autowired
+	BoardRepository boardRepository;
 }
 
 

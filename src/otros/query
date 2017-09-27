@@ -1,0 +1,12 @@
+CREATE TABLE BOARD(ID INT PRIMARY KEY auto_increment, TEMP INT, TEXT VARCHAR(255));
+
+select * from BOARD
+
+insert into BOARD(temp, text) values(2,'frio');
+insert into BOARD(temp, text) values(20,'templado');
+insert into BOARD(temp, text) values(40,'caluroso');
+
+
+
+http://localhost:8080/h2/
+http://localhost:8080/boards
